@@ -14,9 +14,6 @@ akzeptiertauszustand([K|R], Z) :- transformation(Z, K, Z1), akzeptiertauszustand
 
 akzeptiert(WEG):- akzeptiertauszustand(WEG, Z), anfangszustand(Z).
 
-%aufrufbeispiel
-
-
 % Weg - endliches Automat
 
 v(merseburg, halle).
@@ -31,48 +28,3 @@ v(X, Y) :- v(Y,X).
 weg1(START, [START|REST], [START|REST]).
 weg1(START, [ZW | R], WEG) :- v(ZW1, ZW), not(member(ZW1, R)), weg1(START, [ZW1, ZW | R], WEG).
 weg(START, ZIEL, WEG) :-  weg1(START, [ZIEL], WEG).
-
-
-%========================== Affenproblem =================================
-% Initialer Startzustand: (tür, unten, fenster, hatnichts)
-% Endzustand: Affe will Banane haben (X, Y, Z, hat)
-
-% Die Aktionen des Affens: 
-
-% * laufen (möglich): laufen(X, Z) - von wo nach wo - von X zu Y
-% ** Transformation
-% ** von diesem Zustand (X, unten, Z, hatnicht)
-% ** durch dieser Aktion laufen(X, Y)
-% ** zu diesem Zustand (Y, unten, Z, hatnicht)
-
-
-% * schieben (Tisch, wenn Affe neben dem Tisch ist): schieben(X, Y)
-% ** Transformation
-% ** von diesem Zustand (X, unten, X, hatnicht)
-% ** durch dieser Aktion schieben(X, Y)
-% ** zu diesem Zustand (Y, unten, Y, hatnicht)
-
-
-% * klettern (auf den Tisch): klettern(X, )
-% ** Transformation
-% ** von diesem Zustand (X, unten, X, hatnicht)
-% ** durch dieser Aktion klettern()
-% ** von diesem Zustand (X, oben, X, hatnicht)
-
-% * greifen
-% ** Transformation
-% ** von diesem Zustand (mitte, oben, mitte, hatnicht)
-% ** durch dieser Aktion greifen()
-% ** von diesem Zustand (mitte, oben, mitte, hat)
-
-% Anfangszustand
-
-start(tür, unten, fenster, hatnichts).
-end(tür, unten, fenster, hat).
-
-
-bananaweg1(start, [start|R], [start|R]).
-bananaweg1(START, [ZW|R], WEG) :- transformation(ZW1, _, ZW), not(member(ZW1, R)), bananaweg1(START, [ZW1, ZW|R], WEG).
-
-bananaweg(Z, Z1, Weg) :- bananaweg1(Z, [Z1], Weg).
-% Endzustand
