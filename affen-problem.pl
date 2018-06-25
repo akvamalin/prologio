@@ -55,14 +55,14 @@
 % startbananaweg(WEG) :- bananaweg((tür, unten, fenster, hatnichts), [(mitte, oben, mitte, hat)], WEG).
 
 
-    % ================================= SOLUTION =================================
-    % Aufrufbeispiel: 
-    % startbananaweg((tür, unten, fenster, hatnichts), (mitte, oben, mitte, hat), WEG).
+% ================================= SOLUTION =================================
+% Aufrufbeispiel: 
+% startbananaweg((tür, unten, fenster, hatnichts), (mitte, oben, mitte, hat), WEG).
     
 % Schritt 1 - Gehe zum Fenster (wo der Tisch sich befindet)
-transition((X, unten, fenster, T), laufen(X, Y), (Y, unten, fenster, T)).
+transition((X, unten, fenster, T), laufen, (Y, unten, fenster, T)).
 % Schritt 2 - Schiebe den Tisch in die Mitte
-transition((X, unten, X, Q), schieben(X, Y), (Y, unten, Y, Q)).
+transition((X, unten, X, Q), schieben, (Y, unten, Y, Q)).
 % Schritt 3 - Klettere den Tisch
 transition((X, unten, X, hatnichts), klettern, (X, oben, X, hatnichts)).
 % Schritt 4 - Greife Banane
